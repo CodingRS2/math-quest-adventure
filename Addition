@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addition Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        input, button {
+            padding: 10px;
+            font-size: 16px;
+            margin: 5px;
+        }
+        #feedback {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Addition Quiz</h1>
+    <div id="question"></div>
+    <input type="number" id="answer" placeholder="Your answer">
+    <button id="submitAnswer">Submit Answer</button>
+    <div id="feedback"></div>
+
+    <script>
+        let num1, num2, correctAnswer;
+
+        function generateQuestion() {
+            num1 = Math.floor(Math.random() * 10); // Random number from 0 to 9
+            num2 = Math.floor(Math.random() * 10); // Random number from 0 to 9
+            correctAnswer = num1 + num2; // Calculate the correct answer
+            document.getElementById('question').innerText = `What is ${num1} + ${num2}?`; // Display the question
+            document.getElementById('feedback').innerText = ''; // Clear feedback
+            document.getElementById('answer').value = ''; // Clear input field
+        }
+
+        document.getElementById('submitAnswer').addEventListener('click', function() {
+            const userAnswer = parseInt(document.getElementById('answer').value);
+            if (userAnswer === correctAnswer) {
+                document.getElementById('feedback').innerText = 'Correct! Well done!';
+                generateQuestion(); // Generate a new question
+            } else {
+                document.getElementById('feedback').innerText = 'Oops! Try again.';
+            }
+        });
+
+        // Generate the first question when the page loads
+        window.onload = generateQuestion;
+    </script>
+
+</body>
+</html>
+
